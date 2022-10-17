@@ -47,5 +47,17 @@ describe('<TodoItem />', () => {
         const { span } = setup({ todo:{...sampleTodo, done: false} }); // 할일 완료 ㄴㄴ
         expect(span).not.toHaveStyle('text-decoration: line-through;'); // 선 없어
     });
-
+//텍스트(todo: text)를 클릭하면 텍스트에 삭제선이 그어져야 하고, 우측에 삭제버튼을 누르면 해당 항목이 사라져야합니다. span 태그 클릭 이벤트 확인
+    it('calls onToggle', () => {
+        const onToggle = jest.fn();
+        const { span } = setup({ onToggle });
+        fireEvent.click(span);
+        expect(onToggle).toBeCalledWith(sampleTodo.id); // 현재 id: 1
+    });
+    it('calls onRemove', () => {
+        const onRemove = jest.fn();
+        const { button } = setup({ onRemove }); // 삭제 버튼 눌렀냐?
+        fireEvent.click(button);
+        expect(onRemove).toBeCalledWith(sampleTodo.id); // 현재 id: 1
+    });
 });
