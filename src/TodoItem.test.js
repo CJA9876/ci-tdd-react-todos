@@ -37,4 +37,15 @@ describe('<TodoItem />', () => {
         expect(span).toBeTruthy();
         expect(button).toBeTruthy();
     });
+
+    it('shows line-through on span when done is true', () => {
+        const { span } = setup({ todo:{...sampleTodo, done: true} }); // 할일 완료
+        expect(span).toHaveStyle('text-decoration: line-through;'); // 선 있고
+    });
+
+    it('shows line-through on span when done is false', () => {
+        const { span } = setup({ todo:{...sampleTodo, done: false} }); // 할일 완료 ㄴㄴ
+        expect(span).not.toHaveStyle('text-decoration: line-through;'); // 선 없어
+    });
+
 });
